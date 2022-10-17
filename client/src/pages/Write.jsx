@@ -31,7 +31,10 @@ const Write = () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await axios.post("/upload", formData);
+      const res = await axios.post(
+        "https://wezo-blog.herokuapp.com/api/upload",
+        formData
+      );
       return res.data;
     } catch (err) {
       setErr(err.message);
@@ -46,15 +49,18 @@ const Write = () => {
 
     try {
       if (state) {
-        await axios.put(`/posts/${state.id}`, {
-          title,
-          desc,
-          content,
-          cat,
-          img: file ? img : defaultImg,
-        });
+        await axios.put(
+          `https://wezo-blog.herokuapp.com/api/posts/${state.id}`,
+          {
+            title,
+            desc,
+            content,
+            cat,
+            img: file ? img : defaultImg,
+          }
+        );
       } else {
-        await axios.post(`/posts/`, {
+        await axios.post(`https://wezo-blog.herokuapp.com/api/posts/`, {
           title,
           desc,
           content,

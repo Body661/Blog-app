@@ -28,7 +28,7 @@ function Register() {
       const formData = new FormData();
       formData.append("file", file);
       const res = await axios.post(
-        "/upload",
+        "https://wezo-blog.herokuapp.com/api/upload",
         formData
       );
       return res.data;
@@ -49,7 +49,7 @@ function Register() {
     const img = await upload();
 
     try {
-      await axios.post("/auth/register", {
+      await axios.post("https://wezo-blog.herokuapp.com/api/auth/register", {
         ...inputs,
         img: file ? img : "",
       });
