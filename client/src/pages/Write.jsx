@@ -45,7 +45,9 @@ const Write = () => {
     e.preventDefault();
     setLoading(true);
 
-    const img = await upload();
+    let img;
+
+    if (file) img = await upload();
 
     try {
       if (state) {

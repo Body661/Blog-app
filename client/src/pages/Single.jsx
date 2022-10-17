@@ -44,7 +44,9 @@ const Single = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`https://wezo-blog.herokuapp.com/api/posts/${id}`);
+      await axios.delete(`https://wezo-blog.herokuapp.com/api/posts/${id}`, {
+        withCredentials: true,
+      });
       navigate("/");
     } catch (err) {
       setErr(true);

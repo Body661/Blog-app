@@ -12,7 +12,7 @@ export const AuthContextProvider = ({ children }) => {
     };
 
     const logout = async () => {
-        await axios.post("https://wezo-blog.herokuapp.com/api/auth/logout");
+        await axios.post("https://wezo-blog.herokuapp.com/api/auth/logout", { withCredentials: true });
         setCurrentUser(null);
     };
 
