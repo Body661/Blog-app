@@ -1,6 +1,10 @@
 import { db } from '../db.mjs'
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
+
+import * as dotenv from 'dotenv'
+dotenv.config()
+
 export const register = (req, res) => {
     //CHECK EXISTING USER
     const query = "SELECT * FROM users WHERE email = ?";
@@ -42,7 +46,8 @@ export const login = (req, res) => {
 
         const token = jwt.sign({ email: data[0].email, id: data[0].id }, process.env.JWT_SECRET_KEY)
         const { password, ...info } = data[0]
-        res.cookie('access_token', token, { httpOnly: true }).status(200).json(info)
+        console.log(token)
+        res.cookie('access_token', token, { httpOnly: false }).status(200).json(info)
     })
 }
 

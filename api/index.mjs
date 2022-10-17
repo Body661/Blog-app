@@ -24,7 +24,8 @@ import cookieParser from "cookie-parser";
 
 // APP CONFIGURATION
 const app = express();
-app.use(cors())
+app.set('trust proxy', 1)
+app.use(cors({ credentials: true, origin: "https://blog-app-body661.vercel.app" }));
 
 app.get("/api/uploads/:key", async (req, res) => {
     const key = req.params.key
