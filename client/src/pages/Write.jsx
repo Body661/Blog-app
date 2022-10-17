@@ -57,17 +57,22 @@ const Write = () => {
             content,
             cat,
             img: file ? img : defaultImg,
-          }
+          },
+          { withCredentials: true }
         );
       } else {
-        await axios.post(`https://wezo-blog.herokuapp.com/api/posts/`, {
-          title,
-          desc,
-          content,
-          cat,
-          img: file ? img : "",
-          date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-        });
+        await axios.post(
+          `https://wezo-blog.herokuapp.com/api/posts/`,
+          {
+            title,
+            desc,
+            content,
+            cat,
+            img: file ? img : "",
+            date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+          },
+          { withCredentials: true }
+        );
       }
       navigate("/");
     } catch (err) {
