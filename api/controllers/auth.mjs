@@ -55,10 +55,8 @@ export const login = (req, res) => {
     })
 }
 
-export const logout = (req, res) => {
+export const logout = (req, res, next) => {
     res.clearCookie('access_token', {
-        path: '/',
-        domain: "https://blog-app-body661.vercel.app",
         sameSite: "none",
         secure: "true",
     }).status(200).json('Logged out')
