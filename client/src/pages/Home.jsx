@@ -19,7 +19,9 @@ function Home() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(`/posts${category}`);
+        const response = await axios.get(
+          `https://wezo-blog.herokuapp.com/api/posts${category}`
+        );
         setPosts(response.data);
       } catch (err) {
         setErr(true);
@@ -52,7 +54,10 @@ function Home() {
           posts?.map((post) => (
             <div className="post" key={post.id}>
               <div className="img">
-                <img src={`/uploads/${post.img}`} alt="" />
+                <img
+                  src={`https://wezo-blog.herokuapp.com/uploads/${post.img}`}
+                  alt=""
+                />
               </div>
               <div className="content">
                 <Link to={`/post/${post.id}`} className="link">

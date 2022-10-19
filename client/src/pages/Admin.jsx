@@ -20,7 +20,9 @@ const Admin = () => {
 
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(`/admin`);
+        const response = await axios.get(
+          `https://wezo-blog.herokuapp.com/api/admin`
+        );
         setUsers(response.data);
       } catch (err) {
         // setErr(true);
@@ -43,7 +45,7 @@ const Admin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`/admin/`, values);
+    await axios.put(`https://wezo-blog.herokuapp.com/api/admin/`, values);
   };
 
   return (
@@ -60,7 +62,10 @@ const Admin = () => {
           {users?.map((user) => (
             <div className="user" key={user.id}>
               <span>
-                <img src={`/uploads/${user.img}`} alt="user img" />
+                <img
+                  src={`https://wezo-blog.herokuapp.com/uploads/${user.img}`}
+                  alt="user img"
+                />
               </span>
               <span>{user.id}</span>
               <input
