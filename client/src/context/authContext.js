@@ -8,12 +8,12 @@ export const AuthContextProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("user")) || null);
 
     const login = async (inputs) => {
-        const response = await axios.post("https://wezo-blog.herokuapp.com/api/auth/login", inputs, { withCredentials: true });
+        const response = await axios.post("/auth/login", inputs, { withCredentials: true });
         setCurrentUser(response.data);
     };
 
     const logout = async () => {
-        await axios.post("https://wezo-blog.herokuapp.com/api/auth/logout", {}, { withCredentials: true });
+        await axios.post("/auth/logout", {}, { withCredentials: true });
         setCurrentUser(null);
     };
 

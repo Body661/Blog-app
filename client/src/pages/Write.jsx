@@ -25,16 +25,17 @@ const Write = () => {
     if (!currentUser) {
       return navigate("/login");
     }
+
+    if (currentUser.role !== "writer" && currentUser.role !== "admin") {
+      return navigate("/");
+    }
   }, [currentUser, navigate]);
 
   const upload = async () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await axios.post(
-        "https://wezo-blog.herokuapp.com/api/upload",
-        formData
-      );
+      const res = await axios.post("/upload", formData);
       return res.data;
     } catch (err) {
       setErr(err.message);
@@ -47,12 +48,14 @@ const Write = () => {
 
     let img;
 
-    if (file) img = await upload();
+    if (file) {
+      img = await upload();
+    }
 
     try {
       if (state) {
         await axios.put(
-          `https://wezo-blog.herokuapp.com/api/posts/${state.id}`,
+          `/posts/${state.id}`,
           {
             title,
             desc,
@@ -64,7 +67,7 @@ const Write = () => {
         );
       } else {
         await axios.post(
-          `https://wezo-blog.herokuapp.com/api/posts/`,
+          `/posts/`,
           {
             title,
             desc,

@@ -99,13 +99,14 @@ function Navbar() {
               </Link>
             </span>
           )}
-          {currentUser && (
-            <span className="write">
-              <Link className="link" to="/write" onClick={onClickHandler}>
-                Write
-              </Link>
-            </span>
-          )}
+          {currentUser &&
+            (currentUser.role === "writer" || currentUser.role === "admin") && (
+              <span className="write">
+                <Link className="link" to="/write" onClick={onClickHandler}>
+                  Write
+                </Link>
+              </span>
+            )}
         </div>
         {windowSize.innerWidth < 1110 && (
           <img

@@ -14,16 +14,15 @@ function Home() {
   const [posts, setPosts] = useState([]);
   const category = useLocation().search;
   const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(
-          `https://wezo-blog.herokuapp.com/api/posts${category}`
-        );
+        const response = await axios.get(`/posts${category}`);
         setPosts(response.data);
       } catch (err) {
-        console.error(err);
+        setErr(true);
       }
       setLoading(false);
     };
@@ -53,10 +52,7 @@ function Home() {
           posts?.map((post) => (
             <div className="post" key={post.id}>
               <div className="img">
-                <img
-                  src={`https://wezo-blog.herokuapp.com/api/uploads/${post.img}`}
-                  alt=""
-                />
+                <img src={`/uploads/${post.img}`} alt="" />
               </div>
               <div className="content">
                 <Link to={`/post/${post.id}`} className="link">
@@ -72,8 +68,13 @@ function Home() {
             </div>
           ))}
 
-        {!loading && posts.length === 0 && (
-          <p className="not-found">No Posts Yet</p>
+        {!loading && posts.length === 0 && !err && (
+          <p className="not-found">No Posts Yet !</p>
+        )}
+        {!loading && posts.length === 0 && err && (
+          <p className="not-found" style={{ color: "red" }}>
+            Something Went Wrong!
+          </p>
         )}
       </div>
     </div>

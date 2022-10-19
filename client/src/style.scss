@@ -4,6 +4,32 @@ $roze: #e50056;
   font-family: "Cairo", sans-serif;
   box-sizing: border-box;
   margin: 0;
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: white;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: $roze;
+    border-radius: none !important;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #870034;
+    border-radius: none !important;
+  }
+}
+
+.confirm {
+  margin-top: 20px;
+  display: flex;
+  justify-content: end;
 }
 
 .app {
@@ -485,6 +511,7 @@ $roze: #e50056;
         flex-direction: column;
         gap: 30px;
         color: white;
+        min-height: 100vh;
 
         img {
           object-fit: cover;
@@ -700,6 +727,77 @@ $roze: #e50056;
           color: white;
         }
       }
+    }
+  }
+
+  .notFound {
+    padding-top: 130px;
+    padding-bottom: 60px;
+    height: 100vh;
+    color: white;
+    text-align: center;
+
+    h2 {
+      font-size: 80px;
+    }
+    p {
+      font-size: 30px;
+    }
+  }
+
+  .admin {
+    min-height: 100vh;
+    padding-top: 130px;
+    padding-bottom: 60px;
+
+    .users {
+      display: flex;
+      flex-direction: column;
+      color: white;
+
+      .header {
+        display: flex;
+        padding: 10px;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+        color: $roze;
+        font-weight: bold;
+
+        span {
+          flex: 1;
+        }
+      }
+
+      .user {
+        display: flex;
+        padding: 10px;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+
+        span,
+        input,
+        select {
+          flex: 1;
+          overflow: hidden;
+          text-align: center;
+          img {
+            width: 60px;
+          }
+        }
+      }
+    }
+    button {
+      text-align: center;
+      display: block;
+      margin: 40px auto;
+      background-color: $roze;
+      color: white;
+      font-weight: bold;
+      padding: 10px;
     }
   }
 }

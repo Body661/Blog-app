@@ -1,13 +1,11 @@
 import express from "express";
 import authRoutes from "./routes/auth.mjs"
-import userRoutes from "./routes/users.mjs"
 import postRoutes from "./routes/posts.mjs"
+import adminRoutes from "./routes/admin.mjs"
 import cors from 'cors'
 import multer from "multer";
 import { v4 as uuidv4 } from 'uuid';
 import { getFileStream } from "./S3.mjs";
-import fs from "fs"
-import util from "util"
 
 
 import multerS3 from "multer-s3"
@@ -68,8 +66,18 @@ app.post('/api/upload', upload.single('file'), function (req, res, next) {
 app.use(cookieParser())
 app.use(express.json())
 app.use('/api/auth', authRoutes)
-app.use('/api/user', userRoutes)
 app.use('/api/posts', postRoutes)
+app.use('/api/admin', adminRoutes)
+
+// app.use(function (err, req, res, next) {
+//     if (err.status === 404) {
+//         res.status(404).json({ message: "Page not found" })
+//     } else {
+//         return next();
+//     }
+// });
+
+
 
 app.listen(PORT, () => {
     console.log(`Listen on port`);

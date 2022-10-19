@@ -5,18 +5,16 @@ import Write from "./pages/Write";
 import Single from "./pages/Single";
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import NotFound from "./pages/NotFound";
 import "./style.scss"
 
 
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
-  Link,
   Outlet,
 } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "./context/authContext";
+import Admin from "./pages/Admin";
 
 const Layout = () => {
   return (
@@ -45,6 +43,14 @@ function App() {
           path: "/write",
           element: <Write />,
         },
+        {
+          path: "/admin",
+          element: <Admin />,
+        },
+        {
+          path: "*",
+          element: <NotFound />,
+        },
       ],
     },
     {
@@ -55,6 +61,7 @@ function App() {
       path: "/login",
       element: <Login />,
     },
+
   ]);
 
 

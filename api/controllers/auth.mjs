@@ -18,8 +18,8 @@ export const register = (req, res) => {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.password, salt);
 
-        const query = "INSERT INTO users(`username`,`email`,`password`, `img`) VALUES (?)";
-        const values = [req.body.username, req.body.email, hash, req.body.img];
+        const query = "INSERT INTO users(`username`,`email`,`password`, `img`, `role`) VALUES (?)";
+        const values = [req.body.username, req.body.email, hash, req.body.img, `user`];
 
         // CREATING NEW USER
         db.query(query, [values], (err, data) => {
@@ -44,9 +44,8 @@ export const login = (req, res) => {
 
         if (!comparePass) return res.status(400).json('Wrong email or password!')
 
-        const token = jwt.sign({ email: data[0].email, id: data[0].id }, process.env.JWT_SECRET_KEY)
+        const token = jwt.sign({ email: data[0].email, id: data[0].id, role: data[0].role }, process.env.JWT_SECRET_KEY)
         const { password, ...info } = data[0]
-        console.log(token)
         res.cookie('access_token', token, {
             httpOnly: true,
             sameSite: 'none',
