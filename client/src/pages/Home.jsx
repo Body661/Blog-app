@@ -55,7 +55,7 @@ function Home() {
             <div className="post" key={post.id}>
               <div className="img">
                 <img
-                  src={`https://wezo-blog.herokuapp.com/uploads/${post.img}`}
+                  src={`https://wezo-blog.herokuapp.com/api/uploads/${post.img}`}
                   alt=""
                 />
               </div>

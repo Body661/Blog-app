@@ -29,7 +29,7 @@ function Menu({ cat, id }) {
             id !== post.id && (
               <div className="post" key={post.id}>
                 <img
-                  src={`https://wezo-blog.herokuapp.com/uploads/${post.img}`}
+                  src={`https://wezo-blog.herokuapp.com/api/uploads/${post.img}`}
                   alt=""
                 />
                 <h3>{post.title}</h3>

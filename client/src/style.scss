@@ -182,8 +182,8 @@ $roze: #e50056;
           .write {
             background-color: $roze;
             border: 1px white solid;
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             font-weight: 300;
             border-radius: 50%;
             display: flex;
@@ -777,6 +777,7 @@ $roze: #e50056;
         align-items: center;
         text-align: center;
         gap: 20px;
+        border-bottom: 1px solid #777;
 
         span,
         input,

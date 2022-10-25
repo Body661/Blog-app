@@ -99,6 +99,13 @@ function Navbar() {
               </Link>
             </span>
           )}
+          {currentUser && currentUser.role === "admin" && (
+            <span className="">
+              <Link className="link" to="/admin" onClick={onClickHandler}>
+                DASHBOARD
+              </Link>
+            </span>
+          )}
           {currentUser &&
             (currentUser.role === "writer" || currentUser.role === "admin") && (
               <span className="write">

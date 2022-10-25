@@ -1,7 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+
 import Menu from "../components/Menu";
+
+
 import Delete from "../imgs/delete.png";
 import Edit from "../imgs/edit.png";
 import moment from "moment";
@@ -97,20 +100,21 @@ const Single = () => {
       {!loading && post ? (
         <div className="content">
           <img
-            src={`https://wezo-blog.herokuapp.com/uploads/${post?.img}`}
+            src={`https://wezo-blog.herokuapp.com/api/uploads/${post?.img}`}
             alt=""
           />
           <div className="user">
             <img
               className="user-img"
-              src={`https://wezo-blog.herokuapp.com/uploads/${post?.userImg}`}
+              src={`https://wezo-blog.herokuapp.com/api/uploads/${post?.userImg}`}
               alt=""
             />
             <div className="info">
               <span>{post?.username}</span>
               <p>Posted {moment(post?.date).fromNow()}</p>
             </div>
-            {currentUser?.email === post?.email && (
+            {(currentUser?.email === post?.email ||
+              currentUser?.role === "admin") && (
               <div className="edit">
                 <Link to={`/write?edit=${post.id}`} state={post}>
                   <img src={Edit} alt="" />

@@ -49,12 +49,22 @@ export const deletePost = ('/:id', (req, res) => {
     jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
         if (err) return res.status(403).json('Token is invalid!');
 
-        const query = 'DELETE FROM posts WHERE id = ? AND uid = ?'
+        if (user.role === 'admin') {
+            const query = 'DELETE FROM posts WHERE id = ?'
 
-        db.query(query, [req.params.id, user.id], (err, data) => {
-            if (err) return res.status(500).json(err);
-            return res.status(200).json(data);
-        })
+            db.query(query, [req.params.id], (err, data) => {
+                if (err) return res.status(500).json(err);
+                return res.status(200).json(data); sin
+            })
+        } else {
+            const query = 'DELETE FROM posts WHERE id = ? AND uid = ?'
+
+            db.query(query, [req.params.id, user.id], (err, data) => {
+                if (err) return res.status(500).json(err);
+                return res.status(200).json(data);
+            })
+        }
+
     })
 })
 
@@ -65,7 +75,6 @@ export const updatePost = ('/:id', (req, res) => {
     jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
         if (err) return res.status(403).json('Token is invalid!');
 
-        const q = "UPDATE posts SET `title`=?, `desc`=?, `content`=?, `img`=?, `cat`=? WHERE `id` = ? AND `uid` = ?"
 
         const values = [
             req.body.title,
@@ -74,10 +83,23 @@ export const updatePost = ('/:id', (req, res) => {
             req.body.img,
             req.body.cat,
         ]
-        db.query(q, [...values, req.params.id, user.id], (err, data) => {
-            if (err) return res.status(500).json(err);
-            return res.status(200).json(data);
-        })
+
+        if (user.role === 'admin') {
+            let q = "UPDATE posts SET `title`=?, `desc`=?, `content`=?, `img`=?, `cat`=? WHERE `id` = ?"
+
+            db.query(q, [...values, req.params.id], (err, data) => {
+                if (err) return res.status(500).json(err);
+                return res.status(200).json(data);
+            })
+
+        } else {
+            let q = "UPDATE posts SET `title`=?, `desc`=?, `content`=?, `img`=?, `cat`=? WHERE `id` = ? AND `uid` = ?"
+
+            db.query(q, [...values, req.params.id, user.id], (err, data) => {
+                if (err) return res.status(500).json(err);
+                return res.status(200).json(data);
+            })
+        }
     })
 
 })

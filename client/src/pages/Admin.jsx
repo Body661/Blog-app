@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
+import { TailSpin } from "react-loader-spinner";
 import { Form, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 
@@ -8,6 +9,7 @@ const Admin = () => {
   const { currentUser } = useContext(AuthContext);
   const [users, setUsers] = useState([]);
   const [values, setValues] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!currentUser) {
@@ -15,11 +17,12 @@ const Admin = () => {
     }
 
     if (currentUser.role !== "admin") {
-      navigate("/");
+      return navigate("/");
     }
 
     const fetchUsers = async () => {
       try {
+        setLoading(true);
         const response = await axios.get(
           `https://wezo-blog.herokuapp.com/api/admin`
         );
@@ -28,7 +31,7 @@ const Admin = () => {
         // setErr(true);
         console.error(err);
       }
-      // setLoading(false);
+      setLoading(false);
     };
     fetchUsers();
   }, [currentUser, navigate]);
@@ -45,11 +48,34 @@ const Admin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`https://wezo-blog.herokuapp.com/api/admin/`, values);
+    try {
+      setLoading(true);
+      const res = await axios.put(
+        `https://wezo-blog.herokuapp.com/api/admin/`,
+        values
+      );
+      setValues([]);
+    } catch (err) {}
+    setLoading(false);
   };
 
   return (
     <div className="admin">
+      {loading && (
+        <TailSpin
+          height="80"
+          width="80"
+          color="#e50056"
+          ariaLabel="tail-spin-loading"
+          radius="1"
+          wrapperStyle={{
+            position: "absolute",
+            left: "50%",
+            transform: "translate-x(-50%)",
+          }}
+          visible={true}
+        />
+      )}
       <div className="users">
         <div className="header">
           <span className="img">Img</span>
@@ -63,7 +89,7 @@ const Admin = () => {
             <div className="user" key={user.id}>
               <span>
                 <img
-                  src={`https://wezo-blog.herokuapp.com/uploads/${user.img}`}
+                  src={`https://wezo-blog.herokuapp.com/api/uploads/${user.img}`}
                   alt="user img"
                 />
               </span>
