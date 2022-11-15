@@ -9,7 +9,7 @@ function Menu({ cat, id }) {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          `https://wezo-blog.herokuapp.com/api/posts/?category=${cat}`
+            `${process.env.REACT_APP_BACK_END_API}posts/?category=${cat}`
         );
         setPosts(response.data);
       } catch (err) {
@@ -29,7 +29,7 @@ function Menu({ cat, id }) {
             id !== post.id && (
               <div className="post" key={post.id}>
                 <img
-                  src={`https://wezo-blog.herokuapp.com/api/uploads/${post.img}`}
+                  src={`${process.env.REACT_APP_BACK_END_API}uploads/${post.img}`}
                   alt=""
                 />
                 <h3>{post.title}</h3>

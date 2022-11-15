@@ -20,7 +20,7 @@ function Home() {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          `https://wezo-blog.herokuapp.com/api/posts${category}`
+          `${process.env.REACT_APP_BACK_END_API}posts${category}`
         );
         setPosts(response.data);
       } catch (err) {
@@ -55,7 +55,7 @@ function Home() {
             <div className="post" key={post.id}>
               <div className="img">
                 <img
-                  src={`https://wezo-blog.herokuapp.com/api/uploads/${post.img}`}
+                  src={`${process.env.REACT_APP_BACK_END_API}uploads/${post.img}`}
                   alt=""
                 />
               </div>

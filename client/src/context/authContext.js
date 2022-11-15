@@ -16,12 +16,12 @@ export const AuthContextProvider = ({ children }) => {
     }, [cookies.access_token])
 
     const login = async (inputs) => {
-        const response = await axios.post("https://wezo-blog.herokuapp.com/api/auth/login", inputs, { withCredentials: true });
+        const response = await axios.post(`${process.env.REACT_APP_BACK_END_API}auth/login`, inputs, { withCredentials: true });
         setCurrentUser(response.data);
     };
 
     const logout = async () => {
-        await axios.post("https://wezo-blog.herokuapp.com/api/auth/logout", {}, { withCredentials: true });
+        await axios.post(`${process.env.REACT_APP_BACK_END_API}auth/logout`, {}, { withCredentials: true });
         setCurrentUser(null);
     };
 

@@ -51,7 +51,7 @@ const Single = () => {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          `https://wezo-blog.herokuapp.com/api/posts/${id}`
+            `${process.env.REACT_APP_BACK_END_API}posts/${id}`
         );
         setPost(...response.data);
       } catch (err) {
@@ -67,7 +67,7 @@ const Single = () => {
   const handleDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`https://wezo-blog.herokuapp.com/api/posts/${id}`, {
+      await axios.delete(`${process.env.REACT_APP_BACK_END_API}posts/${id}`, {
         withCredentials: true,
       });
       navigate("/");
@@ -100,13 +100,13 @@ const Single = () => {
       {!loading && post ? (
         <div className="content">
           <img
-            src={`https://wezo-blog.herokuapp.com/api/uploads/${post?.img}`}
+            src={`${process.env.REACT_APP_BACK_END_API}uploads/${post?.img}`}
             alt=""
           />
           <div className="user">
             <img
               className="user-img"
-              src={`https://wezo-blog.herokuapp.com/api/uploads/${post?.userImg}`}
+              src={`\`${process.env.REACT_APP_BACK_END_API}uploads/${post?.userImg}`}
               alt=""
             />
             <div className="info">

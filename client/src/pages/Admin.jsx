@@ -24,7 +24,7 @@ const Admin = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `https://wezo-blog.herokuapp.com/api/admin`
+            `${process.env.REACT_APP_BACK_END_API}admin`
         );
         setUsers(response.data);
       } catch (err) {
@@ -51,7 +51,7 @@ const Admin = () => {
     try {
       setLoading(true);
       const res = await axios.put(
-        `https://wezo-blog.herokuapp.com/api/admin/`,
+          `${process.env.REACT_APP_BACK_END_API}admin/`,
         values
       );
       setValues([]);
@@ -89,7 +89,7 @@ const Admin = () => {
             <div className="user" key={user.id}>
               <span>
                 <img
-                  src={`https://wezo-blog.herokuapp.com/api/uploads/${user.img}`}
+                  src={`${process.env.REACT_APP_BACK_END_API}uploads/${user.img}`}
                   alt="user img"
                 />
               </span>
