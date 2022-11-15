@@ -106,7 +106,7 @@ const Single = () => {
           <div className="user">
             <img
               className="user-img"
-              src={`\`${process.env.REACT_APP_BACK_END_API}uploads/${post?.userImg}`}
+              src={`${process.env.REACT_APP_BACK_END_API}uploads/${post?.userImg}`}
               alt=""
             />
             <div className="info">
